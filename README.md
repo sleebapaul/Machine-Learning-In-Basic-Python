@@ -44,11 +44,7 @@ I only used a part the entire dataset. Find the data in `irisData` folder.
 
 [3] [https://en.wikipedia.org/wiki/Logistic_function](https://en.wikipedia.org/wiki/Logistic_function)  
 
-Reference and Theory
---------------------
-
-[1] [https://github.com/KnetML/Knet-the-Julia-dope/blob/master/chapter02_supervised-learning/section3-logistic-regression.ipynb](https://github.com/KnetML/Knet-the-Julia-dope/blob/master/chapter02_supervised-learning/section3-logistic-regression.ipynb)
-[2] [https://blog.goodaudience.com/logistic-regression-from-scratch-in-numpy-5841c09e425f](https://blog.goodaudience.com/logistic-regression-from-scratch-in-numpy-5841c09e425f)
-[3] [https://en.wikipedia.org/wiki/Logistic_function](https://en.wikipedia.org/wiki/Logistic_function) 
 [4] [https://github.com/leventbass/logistic_regression/blob/master/Logistic_Regression.ipynb](https://github.com/leventbass/logistic_regression/blob/master/Logistic_Regression.ipynb)
+
+
 
