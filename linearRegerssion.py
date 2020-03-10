@@ -17,13 +17,13 @@ Polynomial Regression
 
 """
 
-import random
+from random import shuffle
 import matplotlib.pyplot as plt
 
 
 class LinearRegression():
     """
-    Simple Linear with minimum library dependencies
+    Simple Linear Regression with minimum library dependencies
     """
     def __init__(self):
         pass
@@ -163,15 +163,15 @@ class LinearRegression():
 if __name__ == "__main__":
 
     #  Load dataset
-    with open("data/x.txt", "r") as f:
+    with open("weatherData/x.txt", "r") as f:
         dataX = list(map(float, f.readlines()))
 
-    with open("data/y.txt", "r") as f:
+    with open("weatherData/y.txt", "r") as f:
         dataY = list(map(float, f.readlines()))
 
     # Shuffle the dataset 
     temp = list(zip(dataX, dataY))
-    random.shuffle(temp)
+    shuffle(temp)
     dataX, dataY = zip(*temp)
 
     # Split to training and validation set
