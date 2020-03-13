@@ -44,7 +44,24 @@ I only used a part the entire dataset. Find the data in `irisData` folder.
 
 [3] [https://en.wikipedia.org/wiki/Logistic_function](https://en.wikipedia.org/wiki/Logistic_function)  
 
-[4] [https://github.com/leventbass/logistic_regression/blob/master/Logistic_Regression.ipynb](https://github.com/leventbass/logistic_regression/blob/master/Logistic_Regression.ipynb)
+[4] [https://github.com/leventbass/logistic_regression/blob/master/Logistic_Regression.ipynb](https://github.com/leventbass/logistic_regression/blob/master/Logistic_Regression.ipynb)  
+
+
+## Naive Bayes Classifier using basic Python data structures 
+
+Dataset used can be found [here](https://www.geeksforgeeks.org/naive-bayes-classifiers/). 
+Find the data in `golfData` folder.
+
+NB: This works only for categorical features, not continuous features. We may need algorithms like Gaussian Naive Bayes, 
+for handling continuous features. 
+
+### Reference and Theory
+
+[1] [https://www.hackerearth.com/blog/developers/introduction-naive-bayes-algorithm-codes-python-r](https://www.hackerearth.com/blog/developers/introduction-naive-bayes-algorithm-codes-python-r)  
+
+[2] [https://www.geeksforgeeks.org/naive-bayes-classifiers/](https://www.geeksforgeeks.org/naive-bayes-classifiers/)
+
+[3] [https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0](https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0)
 
 
 
