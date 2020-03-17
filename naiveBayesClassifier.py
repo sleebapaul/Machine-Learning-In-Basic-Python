@@ -40,101 +40,104 @@ P(Label|Features) proportional to  P(x1|Label) * P(x2|Label) * P(x3|Label) * P(x
 
 from random import shuffle
 import pprint
+class NaiveBayesClassifier(object):
+    
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.featureNames = ["col_{}".format(i) for i in range(len(x[0]))]
+        self.likelihood = {}
+
+        self.priors = {}
+        self.priorCount = {}
+
+    def calculatePriors(self):
+        """
+        Calculate the prior probabilities of dependent variable/output
+        """
+
+        for val in self.y:
+            if self.priorCount.get(val):
+                self.priorCount[val] += 1
+            else:
+                self.priorCount[val] = 1
+
+        for key, val in self.priorCount.items():
+            self.priors[key] = self.priorCount[key]/len(self.y)
 
 
-def calculatePriors(y):
-    """
-    Calculate the prior probabilities of dependent variable/output
-    """
-    priors = {}
-    priorCount = {}
+    def calculateLikelihood(self, feature):
+        """
+        Calculate likelihood of a feature
+        Likelihood is a map of a feature with keys as categories in a feature
+        Keys are probabilities in each class in Y
 
-    for val in y:
-        if priorCount.get(val):
-            priorCount[val] += 1
-        else:
-            priorCount[val] = 1
+        Eg. 
+        Feature: Weather 
+        Categories: Sunny, Rainy
+        Y: Play, Don't Play 
 
-    for key, val in priorCount.items():
-        priors[key] = priorCount[key]/len(y)
-    return priors, priorCount
+        {"Weather": {'Sunny': {'Play': .45, 'Don't Play: .55}, 'Rainy': {'Play': .69, 'Don't Play: .41}}}
+        Feature -> Categories in the feature -> Categories assigned to each label
+        """
+        likelihood = {}
+        for category in set(feature):
+            temp = {}
+            for val in set(self.y):
+                temp[val] = 0
+            likelihood[category] = temp
 
+        for feat, out in zip(feature, self.y):
+            likelihood[feat][out] += 1
 
-def calculateLikelihood(feature, priorCount, y):
-    """
-    Calculate likelihood of a feature
-    Likelihood is a map of a feature with keys as categories in a feature
-    Keys are probabilities in each class in Y
+        for probs in likelihood.values():
+            for element in probs:
+                probs[element] = probs[element] / self.priorCount[element]
 
-    Eg. 
-    Feature: Weather 
-    Categories: Sunny, Rainy
-    Y: Play, Don't Play 
-
-    {"Weather": {'Sunny': {'Play': .45, 'Don't Play: .55}, 'Rainy': {'Play': .69, 'Don't Play: .41}}}
-    Feature -> Categories in the feature -> Categories assigned to each label
-    """
-    likelihood = {}
-    for category in set(feature):
-        temp = {}
-        for val in set(y):
-            temp[val] = 0
-        likelihood[category] = temp
-
-    for feat, out in zip(feature, y):
-        likelihood[feat][out] += 1
-
-    for probs in likelihood.values():
-        for element in probs:
-            probs[element] = probs[element] / priorCount[element]
-
-    return likelihood
+        return likelihood
 
 
-def trainNBClassifier(features, featureNames, y):
-    """
-    Training Naive Bayes means calculating the priors and likelihoods
-    """
-    priors, priorCount = calculatePriors(y)
-    likelihood = {}
-    for j in range(len(features[0])):
-        feature = []
-        for i in range(len(features)):
-            feature.append(features[i][j])
-        tmpLikelihood = calculateLikelihood(feature, priorCount,  y)
-        likelihood[featureNames[j]] = tmpLikelihood
-    return priors, likelihood
+    def fit(self):
+        """
+        Training Naive Bayes means calculating the priors and likelihoods
+        """
+        self.calculatePriors()
+        for j in range(len(self.x[0])):
+            feature = []
+            for i in range(len(self.x)):
+                feature.append(self.x[i][j])
+            tmpLikelihood = self.calculateLikelihood(feature)
+            self.likelihood[self.featureNames[j]] = tmpLikelihood
 
+    def predict(self, x):
+        """
+        Calculate probability for each output class for the input using Bayes Formula
+        Return the maximum probability class
+        """
+        probs = {val: 1 for val in set(self.y)}
 
-def predict(x, labels, featureNames, priors, likelihood):
-    """
-    Calculate probability for each output class for the input using Bayes Formula
-    Return the maximum probability class
-    """
-    probs = {val: 1 for val in labels}
+        # Multiply the likelihood with each feature and each label
+        idx = 0
+        for val in x:
+            for label in set(self.y):
+                probs[label] *= self.likelihood[self.featureNames[idx]][val][label]
+            idx += 1
 
-    # Multiply the likelihood with each feature and each label
-    idx = 0
-    for val in x:
-        for label in labels:
-            probs[label] *= likelihood[featureNames[idx]][val][label]
-        idx += 1
+        # Multiply the prior probability
+        for val in self.priors:
+            probs[val] *= self.priors[val]
 
-    # Multiply the prior probability
-    for val in priors:
-        probs[val] *= priors[val]
+        # Normalize the probabilities
+        total = sum(probs.values())
 
-    # Normalize the probabilities
-    total = sum(probs.values())
+        for key in probs:
+            probs[key] /= total
 
-    for key in probs:
-        probs[key] /= total
+        print("\nClass Probabilities: ", probs)
 
-    print("\nClass Probabilities: ", probs)
-
-    # Find maximum probability
-    keyBest = max(probs, key=probs.get)
-    return keyBest
+        # Find maximum probability
+        keyBest = max(probs, key=probs.get)
+        return keyBest
 
 
 if __name__ == "__main__":
@@ -149,12 +152,14 @@ if __name__ == "__main__":
 
     featureNames = ["col_{}".format(i) for i in range(len(dataX[0]))]
 
-    priors, likelihood = trainNBClassifier(dataX, featureNames, dataY)
-    print("\nPriors: ", priors)
+    nbClassifier = NaiveBayesClassifier(dataX, dataY)
+    nbClassifier.fit()
+
+    print("\nPriors: ", nbClassifier.priors)
     print("\nLikelihood: ")
-    pprint.pprint(likelihood)
+    pprint.pprint(nbClassifier.likelihood)
 
     test = ["Sunny", "Hot", "Normal", "False"]
     labels = list(set(dataY))
 
-    print("\nResult: ", predict(test, labels, featureNames, priors, likelihood))
+    print("\nResult: ", nbClassifier.predict(test))

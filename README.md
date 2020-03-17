@@ -16,7 +16,7 @@ This is reinventing the wheel? Yes. But sometimes we learn a lot if we start fro
 
 ## Linear Regression using basic Python data structures 
 
-Dataset used can be found [here](https://drive.google.com/file/d/1fiHg5DyvQeRC4SyhsVnje5dhJNyVWpO1/view). 
+Original dataset used can be found [here](https://drive.google.com/file/d/1fiHg5DyvQeRC4SyhsVnje5dhJNyVWpO1/view). 
 I only used a part the entire dataset. Find the data in `weatherData` folder.
 
 ### Reference and Theory
@@ -33,8 +33,8 @@ I only used a part the entire dataset. Find the data in `weatherData` folder.
 
 ## Logistic Regression using basic Python data structures 
 
-Dataset used can be found [here](https://archive.ics.uci.edu/ml/datasets/Iris). 
-I only used a part the entire dataset. Find the data in `irisData` folder.
+Original dataset used can be found [here](https://archive.ics.uci.edu/ml/datasets/Iris).   
+I used a part the entire dataset. Find the data in `irisData` folder.
 
 ### Reference and Theory
 
@@ -49,7 +49,7 @@ I only used a part the entire dataset. Find the data in `irisData` folder.
 
 ## Naive Bayes Classifier using basic Python data structures 
 
-Dataset used can be found [here](https://www.geeksforgeeks.org/naive-bayes-classifiers/). 
+Original dataset used can be found [here](https://www.geeksforgeeks.org/naive-bayes-classifiers/).   
 Find the data in `golfData` folder.
 
 NB: This works only for categorical features, not continuous features. We may need algorithms like Gaussian Naive Bayes, 
@@ -62,6 +62,25 @@ for handling continuous features.
 [2] [https://www.geeksforgeeks.org/naive-bayes-classifiers/](https://www.geeksforgeeks.org/naive-bayes-classifiers/)
 
 [3] [https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0](https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0)
+
+## A Text Classifier skelton using basic Python data structures 
+
+Text Classifier includes, 
+
+- Converting text to numerical features - Done 
+    - Using Term Frequency and Term Frequency - Inverse Document Frequency
+- Attach a classifier algorithm like Naive Bayes - Pending
+- Train and test the model - Pending 
+
+Original dataset used can be found [here](https://www.kaggle.com/uciml/sms-spam-collection-dataset).   
+Find the data in `spamData` folder.
+
+### Reference and Theory   
+
+[1] [https://www.geeksforgeeks.org/bag-of-words-bow-model-in-nlp/](https://www.geeksforgeeks.org/bag-of-words-bow-model-in-nlp/)  
+[2] [https://www.geeksforgeeks.org/tf-idf-model-for-page-ranking/](https://www.geeksforgeeks.org/tf-idf-model-for-page-ranking/)  
+[3] [https://gist.github.com/sebleier/554280](https://gist.github.com/sebleier/554280)
+
 
 
 
