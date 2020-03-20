@@ -136,5 +136,24 @@ Find the data in `spamData` folder.
 
 
 
+## A Text Classifier skelton using basic Python data structures 
+
+Text Classifier includes, 
+
+- Converting text to numerical features - Done 
+    - Using Term Frequency and Term Frequency - Inverse Document Frequency
+- Attach a classifier algorithm like Naive Bayes - Pending
+- Train and test the model - Pending 
+
+Original dataset used can be found [here](https://www.kaggle.com/uciml/sms-spam-collection-dataset).   
+Find the data in `spamData` folder.
+
+### Reference and Theory   
+
+[1] [https://www.geeksforgeeks.org/bag-of-words-bow-model-in-nlp/](https://www.geeksforgeeks.org/bag-of-words-bow-model-in-nlp/)  
+[2] [https://www.geeksforgeeks.org/tf-idf-model-for-page-ranking/](https://www.geeksforgeeks.org/tf-idf-model-for-page-ranking/)  
+[3] [https://gist.github.com/sebleier/554280](https://gist.github.com/sebleier/554280)
+
+
 
 
