@@ -58,9 +58,10 @@ partial derivative(loss function) w.r.t. theta = Sum([yPred - yTrue] * X)
 
 """
 
-import random
-import matplotlib.pyplot as plt
 import math
+import random
+
+import matplotlib.pyplot as plt
 
 
 class LogisticRegression():
@@ -71,19 +72,20 @@ class LogisticRegression():
     def __init__(self):
         pass
 
-    def _sigmoid(self, value):
+    def __sigmoid(self, value):
         return 1/(1+math.exp(-1*value))
 
-    def _init(self, rows, cols):
+    def __init(self, rows, cols):
         """
         Initialize the learnable parameters
         """
-        weights = [[random.random() for col in range(cols)] for row in range(rows)]
-        
+        weights = [[random.random() for col in range(cols)]
+                   for row in range(rows)]
+
         bias = 0
         return weights, bias
 
-    def _matrixMultiply(self, matrixA, matrixB):
+    def __matrixMultiply(self, matrixA, matrixB):
         """
         Multiply two matrices
         Now we may appreciate the ready-to-go APIs from famous frameworks :D
@@ -91,7 +93,8 @@ class LogisticRegression():
         if len(matrixA[0]) != len(matrixB):
             return None
 
-        result = [[0 for col in range(len(matrixB[0]))] for row in range(len(matrixA))]
+        result = [[0 for col in range(len(matrixB[0]))]
+                  for row in range(len(matrixA))]
         # Iterate through rows of matrixA
         for rowA in range(len(matrixA)):
             # Iterate in columns of matrixB
@@ -101,7 +104,7 @@ class LogisticRegression():
                     result[rowA][colB] += matrixA[rowA][i] * matrixB[i][colB]
         return result
 
-    def _matrixTranspose(self, matrix):
+    def __matrixTranspose(self, matrix):
         """
         Given a matrix, return the transpose of the matrix
         """
@@ -112,7 +115,7 @@ class LogisticRegression():
                 transpose[col][row] = matrix[row][col]
         return transpose
 
-    def _calculatePredictions(self, weights, bias, data):
+    def __calculatePredictions(self, weights, bias, data):
         """
         Calculate the predictions using formula Wx + b
         Wx is a matrix multiplication
@@ -122,21 +125,23 @@ class LogisticRegression():
         """
 
         result = 0
-        tempResult = self._matrixMultiply(data, weights)
+        tempResult = self.__matrixMultiply(data, weights)
         result = [tempResult[i][0] + bias for i in range(len(tempResult))]
-        result = [self._sigmoid(val) for val in result]
+        result = [self.__sigmoid(val) for val in result]
         return result
 
-    def _calculateLossFunc(self, yPrediction, yTrue, weights, bias, regularizationCoeff=None):
+    def __calculateLossFunc(self, yPrediction, yTrue, weights, bias, regularizationCoeff=None):
         """
         Calculates the Log Loss with or without Ridge regularisation (L2 regularization)
         """
         # Calculate the difference between predicted and actual outputs
 
         loss = 0
-        
-        partOne = [yTrue[i] * math.log(yPrediction[i]) for i in range(len(yTrue))]
-        partTwo = [(1-yTrue[i]) * math.log(1-yPrediction[i]) for i in range(len(yTrue))]
+
+        partOne = [yTrue[i] * math.log(yPrediction[i])
+                   for i in range(len(yTrue))]
+        partTwo = [(1-yTrue[i]) * math.log(1-yPrediction[i])
+                   for i in range(len(yTrue))]
 
         loss = (-1/len(yTrue)) * \
             sum([partOne[i] + partTwo[i] for i in range(len(partOne))])
@@ -151,23 +156,23 @@ class LogisticRegression():
         loss = loss + regValue
         return loss
 
-    def _getGradient(self, ypred, ytrue, x):
+    def __getGradient(self, ypred, ytrue, x):
         """
         Calculates gradients of Log Error for weights and bias
         """
         # Learn theory to understand what is the derivative of MSE for slope and Y intercept
         diff = [[ypred[i] - ytrue[i]] for i in range(len(ytrue))]
 
-        xTranspose = self._matrixTranspose(x)
+        xTranspose = self.__matrixTranspose(x)
 
-        gradientWeightTemp = self._matrixMultiply(xTranspose, diff)
+        gradientWeightTemp = self.__matrixMultiply(xTranspose, diff)
 
         gradientWeights = [[val[0]/len(diff)] for val in gradientWeightTemp]
         gradientBias = sum([x[0] for x in diff])/len(diff)
 
         return gradientWeights, gradientBias
 
-    def _optimizer(self, x, yTrue, regularizationCoeff=None, learningRate=0.0001, epochs=100):
+    def __optimizer(self, x, yTrue, regularizationCoeff=None, learningRate=0.0001, epochs=100):
         """
         Performs the learning process
         """
@@ -175,35 +180,37 @@ class LogisticRegression():
         weightHistory = []
         biasHistory = []
 
-        myWeights, myBias = self._init(len(x[0]), 1)
+        myWeights, myBias = self.__init(len(x[0]), 1)
         lossHistory = []
 
         # Iteratively update the coefficients, slope and y intercept
         for epoch in range(epochs):
 
-            yPred = self._calculatePredictions(myWeights, myBias, x)
+            yPred = self.__calculatePredictions(myWeights, myBias, x)
             # Calculate MSE loss between prediction and actual output
-            loss = self._calculateLossFunc(yPred, yTrue, myWeights, myBias, regularizationCoeff)
+            loss = self.__calculateLossFunc(
+                yPred, yTrue, myWeights, myBias, regularizationCoeff)
             lossHistory.append(loss)
 
             if epoch % 10 == 0:
                 print("Loss at {}th epoch: {}".format(epoch, loss))
 
-            # Find the gradients 
-            gradientWeights, gradientBias = self._getGradient(yPred, yTrue, x)
+            # Find the gradients
+            gradientWeights, gradientBias = self.__getGradient(yPred, yTrue, x)
 
             # Find gradient for regularization part
             # Refer theory to understand the calculation
             regValueUpdate = 0
             if regularizationCoeff:
-                regValueUpdate = sum([val[0] for val in myWeights]) * regularizationCoeff / len(x)
+                regValueUpdate = sum(
+                    [val[0] for val in myWeights]) * regularizationCoeff / len(x)
 
             # Gradient Descent update step
             myWeights = [[myWeights[i][0] - learningRate * gradientWeights[i][0]]
-                       for i in range(len(myWeights))]
+                         for i in range(len(myWeights))]
             if regularizationCoeff:
                 myWeights = [[myWeights[i][0] - learningRate *
-                           regValueUpdate] for i in range(len(myWeights))]
+                              regValueUpdate] for i in range(len(myWeights))]
 
             myBias = myBias - learningRate * gradientBias
 
@@ -215,16 +222,16 @@ class LogisticRegression():
         """
         Trains the regressor with hyper parameters
         """
-        return self._optimizer(x, yTrue, regularizationCoeff, learningRate, epochs)
+        return self.__optimizer(x, yTrue, regularizationCoeff, learningRate, epochs)
 
     def predict(self, x, weights, bias):
         """
         Predict the result for a new test input
         """
         result = 0
-        tempResult = self._matrixMultiply(x, weights)
+        tempResult = self.__matrixMultiply(x, weights)
         result = tempResult[0] + bias
-        if self._sigmoid(result) >= 0.5:
+        if self.__sigmoid(result) >= 0.5:
             return 1
         return 0
 
@@ -233,20 +240,20 @@ class LogisticRegression():
         Calculate accuracy 
         """
         # Refer theory for understanding the calculation of R2
-        yPred = self._calculatePredictions(weights, bias, data)
-        yPred = [1 if val>=0.5 else 0 for val in yPred]
+        yPred = self.__calculatePredictions(weights, bias, data)
+        yPred = [1 if val >= 0.5 else 0 for val in yPred]
         temp = [1 if yPred[i] == yTrue[i] else 0 for i in range(len(yTrue))]
         accuracy = sum(temp)/len(yTrue)
         return accuracy
 
-    def plotLoss(self, lossHistory, name = ""):
+    def plotLoss(self, lossHistory, name=""):
         """
         Plot the loss vs iterations graph
         """
         # Clear the canvas
         plt.clf()
 
-        # Plot data 
+        # Plot data
         plt.plot(lossHistory, color="m")
 
         plt.xlabel('Iterations')
@@ -297,4 +304,3 @@ if __name__ == "__main__":
     print("Testing accuracy: ", logisticRegression.calculateAccuracy(
         testX, testY, optWeights, optBias))
     logisticRegression.plotLoss(lossHistory)
-
