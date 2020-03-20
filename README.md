@@ -1,4 +1,4 @@
-# ML In bare Python 
+# Machine Learning algorithms in basic Python 
 
 This is something I wanted to do a long time ago. ML in basic Python. 
 No fancy frameworks, just basic Python data structures to code up simple ML algos like Linear Regression.
@@ -61,7 +61,80 @@ for handling continuous features.
 
 [2] [https://www.geeksforgeeks.org/naive-bayes-classifiers/](https://www.geeksforgeeks.org/naive-bayes-classifiers/)
 
-[3] [https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0](https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0)
+[3] [https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0](https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0)  
+
+
+## Gaussian Naive Bayes Classifier using basic Python data structures
+
+Original dataset used can be found [here](https://archive.ics.uci.edu/ml/datasets/Iris).   
+I used a part the entire dataset. Find the data in `irisData` folder.  
+
+### Reference and Theory
+
+[1] [https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html)  
+
+[2] [http://blog.christianperone.com/2011/10/machine-learning-text-feature-extraction-tf-idf-part-ii/](http://blog.christianperone.com/2011/10/machine-learning-text-feature-extraction-tf-idf-part-ii/)  
+
+[3] [https://hackernoon.com/implementation-of-gaussian-naive-bayes-in-python-from-scratch-c4ea64e3944d](https://hackernoon.com/implementation-of-gaussian-naive-bayes-in-python-from-scratch-c4ea64e3944d)  
+
+
+## A Text Classifier skelton using basic Python data structures 
+
+Text Classifier includes, 
+
+- Converting text to numerical features - Done 
+    - Using Term Frequency (TF)
+    - Using Term Frequency - Inverse Document Frequency (TF-IDF)
+- Attach a classifier algorithm like Naive Bayes - Gaussian Naive Bayes Classifier
+- Train and test the model  
+
+### A Caveat
+
+*Zero Variance Problem*
+
+This issue can arise on,
+
+1. There is an unobserved label or feature in training data which is present in test data  
+2. There are few or no examples in training data to calculate likelihood for a feature  
+...
+
+The ways to mitigate the issue are,  
+
+1. Do not multiply the likelihood of zero variance features
+2. Use an epsilon value that could handle the situation of zero variance during the calculation of Gaussian function i.e. Likelihood  
+... 
+
+I chose the second one, but it is not very effective when then number of vocabulary, i.e. number of features increases. 
+Currently, I chose epsilon as `0.1` for 50 training examples. 
+
+I observed that, my GaussianNB classifier works well with Iris dataset, which is a balanced dataset with less non-zero data.
+When it comes to a sparse representation like TF-IDF on a biased dataset like `spamData`, things are going wrong. 
+
+Feel free to come up with a better solution for this issue. 
+
+Original dataset used can be found [here](https://www.kaggle.com/uciml/sms-spam-collection-dataset).   
+Find the data in `spamData` folder.
+
+### Reference and Theory   
+
+[1] [https://www.geeksforgeeks.org/bag-of-words-bow-model-in-nlp/](https://www.geeksforgeeks.org/bag-of-words-bow-model-in-nlp/)  
+
+[2] [https://www.geeksforgeeks.org/tf-idf-model-for-page-ranking/](https://www.geeksforgeeks.org/tf-idf-model-for-page-ranking/)   
+
+[3] [https://gist.github.com/sebleier/554280](https://gist.github.com/sebleier/554280)  
+
+*Zero Variance Problem*
+
+[1] [https://stackoverflow.com/questions/12344375/probability-density-function-with-zero-standard-deviation](https://stackoverflow.com/questions/12344375/probability-density-function-with-zero-standard-deviation)  
+
+[2] [https://stackoverflow.com/questions/46513538/implement-naive-bayes-gaussian-classifier-on-the-number-classification-data](https://stackoverflow.com/questions/46513538/implement-naive-bayes-gaussian-classifier-on-the-number-classification-data)  
+
+[3] [https://stats.stackexchange.com/questions/233834/what-is-the-normal-distribution-when-standard-deviation-is-zero](https://stats.stackexchange.com/questions/233834/what-is-the-normal-distribution-when-standard-deviation-is-zero)  
+
+[4] [https://stats.stackexchange.com/questions/162979/does-zero-observations-problem-exist-for-gaussian-naive-bayes](https://stats.stackexchange.com/questions/162979/does-zero-observations-problem-exist-for-gaussian-naive-bayes)
+
+
+
 
 ## A Text Classifier skelton using basic Python data structures 
 

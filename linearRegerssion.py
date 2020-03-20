@@ -18,6 +18,7 @@ Polynomial Regression
 """
 
 from random import shuffle
+
 import matplotlib.pyplot as plt
 
 
@@ -25,10 +26,11 @@ class LinearRegression():
     """
     Simple Linear Regression with minimum library dependencies
     """
+
     def __init__(self):
         pass
 
-    def _calculateLossFunc(self, yTrue, yPred, slope, regularizationCoeff=None):
+    def __calculateLossFunc(self, yTrue, yPred, slope, regularizationCoeff=None):
         """
         Calculates the Mean Square Error with or without Ridge regularisation (L2 regularization)
         """
@@ -36,7 +38,7 @@ class LinearRegression():
         diff = [yTrue[i] - yPred[i] for i in range(len(yTrue))]
         # Square the differences
         squaredDiff = [val**2 for val in diff]
-        # Take sum of the squares 
+        # Take sum of the squares
         loss = sum(squaredDiff)/(2*len(yTrue))
 
         regValue = 0
@@ -48,22 +50,22 @@ class LinearRegression():
         loss = loss + regValue
         return loss
 
-    def _getGradient(self, yPred, yTrue, x):
+    def __getGradient(self, yPred, yTrue, x):
         """
         Calculates gradients of Mean Square Error for Slope and Y Intercept
         """
-        
+
         # Learn theory to understand what is the derivative of MSE for slope and Y intercept
         diff = [yPred[i] - yTrue[i] for i in range(len(yTrue))]
-        
+
         gradientSlopeTemp = [x[i]*diff[i] for i in range(len(diff))]
         gradientSlope = sum(gradientSlopeTemp)/len(diff)
-        
+
         gradientYIntercept = sum(diff)/len(diff)
 
         return gradientSlope, gradientYIntercept
 
-    def _optimizer(self, x, yTrue, regularizationCoeff=None, learningRate=0.0001, epochs=100):
+    def __optimizer(self, x, yTrue, regularizationCoeff=None, learningRate=0.0001, epochs=100):
         """
         Performs the learning process
         """
@@ -78,14 +80,14 @@ class LinearRegression():
             yPred = [slope[-1] * x[i] + intercept[-1] for i in range(len(x))]
 
             # Calculate MSE loss between prediction and actual output
-            loss.append(self._calculateLossFunc(
+            loss.append(self.__calculateLossFunc(
                 yTrue, yPred, slope[-1], regularizationCoeff))
 
             if epoch % 10 == 0:
                 print("Loss at {}th epoch: {}".format(epoch, loss[-1]))
 
-            # Find the gradients 
-            gradientSlope, gradientYIntercept = self._getGradient(
+            # Find the gradients
+            gradientSlope, gradientYIntercept = self.__getGradient(
                 yPred, yTrue, x)
 
             # Find gradient for regularization part
@@ -110,7 +112,7 @@ class LinearRegression():
         """
         Trains the regressor with hyper parameters
         """
-        return self._optimizer(x, yTrue, regularizationCoeff, learningRate, epochs)
+        return self.__optimizer(x, yTrue, regularizationCoeff, learningRate, epochs)
 
     def plotRegressionLine(self, xVal, yVal, slope, intercept, name=None):
         """
@@ -119,7 +121,7 @@ class LinearRegression():
         # Clear the canvas
         plt.clf()
 
-        # Plot data 
+        # Plot data
         plt.scatter(xVal, yVal, color="m", marker="o", s=30)
 
         # Calculate and plot the regression line
@@ -169,7 +171,7 @@ if __name__ == "__main__":
     with open("weatherData/y.txt", "r") as f:
         dataY = list(map(float, f.readlines()))
 
-    # Shuffle the dataset 
+    # Shuffle the dataset
     temp = list(zip(dataX, dataY))
     shuffle(temp)
     dataX, dataY = zip(*temp)
