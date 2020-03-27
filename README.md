@@ -131,4 +131,19 @@ Find the data in `spamData` folder.
 
 [3] [https://stats.stackexchange.com/questions/233834/what-is-the-normal-distribution-when-standard-deviation-is-zero](https://stats.stackexchange.com/questions/233834/what-is-the-normal-distribution-when-standard-deviation-is-zero)  
 
-[4] [https://stats.stackexchange.com/questions/162979/does-zero-observations-problem-exist-for-gaussian-naive-bayes](https://stats.stackexchange.com/questions/162979/does-zero-observations-problem-exist-for-gaussian-naive-bayes)
+[4] [https://stats.stackexchange.com/questions/162979/does-zero-observations-problem-exist-for-gaussian-naive-bayes](https://stats.stackexchange.com/questions/162979/does-zero-observations-problem-exist-for-gaussian-naive-bayes)  
+
+
+## Time series forecasting techniques using basic Python data structures
+
+Original dataset used can be found [here](https://www.hackerrank.com/challenges/forecasting-passenger-traffic/problem).   
+Find the data in `airportData` folder.  
+
+Plots can be found in the `plots/` folder once the script is run. Root mean square error is also calculated and printed for evaluation.  
+
+
+### Reference and Theory  
+
+[1] [https://quant.stackexchange.com/questions/46803/how-can-i-forecast-the-exponential-moving-average-of-the-next-day](https://quant.stackexchange.com/questions/46803/how-can-i-forecast-the-exponential-moving-average-of-the-next-day)  
+
+[2] [https://www.analyticsvidhya.com/blog/2018/02/time-series-forecasting-methods/](https://www.analyticsvidhya.com/blog/2018/02/time-series-forecasting-methods/)
