@@ -169,8 +169,8 @@ if __name__ == "__main__":
     dataY = list(dataY)
 
     # Split to training and validation set
-    dataX = dataX[:50]
-    dataY = dataY[:50]
+    dataX = dataX[:100]
+    dataY = dataY[:100]
 
     split = int(0.8 * len(dataX))
 

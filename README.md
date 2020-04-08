@@ -147,3 +147,19 @@ Plots can be found in the `plots/` folder once the script is run. Root mean squa
 [1] [https://quant.stackexchange.com/questions/46803/how-can-i-forecast-the-exponential-moving-average-of-the-next-day](https://quant.stackexchange.com/questions/46803/how-can-i-forecast-the-exponential-moving-average-of-the-next-day)  
 
 [2] [https://www.analyticsvidhya.com/blog/2018/02/time-series-forecasting-methods/](https://www.analyticsvidhya.com/blog/2018/02/time-series-forecasting-methods/)
+
+
+## K-Means clustering algorithm using basic Python data structures  
+
+Original dataset used can be found [here](https://archive.ics.uci.edu/ml/datasets/Iris).   
+I used a part the entire dataset. Find the data in `clusterData` folder.  
+
+I've plotted the clusters after training the K-Means algorithm. It will be generated in the `plots` if you run `kMeansClustering.py`.
+This plot is compared with original labels of the data to compare and understand if the clustering doing a good job. 
+Check out `plots/clusterGraph.png` and `plots/clusterGraphFromLabels.png` for the this comparison.  
+
+### Reference and Theory  
+
+[1] [https://towardsdatascience.com/k-means-clustering-algorithm-applications-evaluation-methods-and-drawbacks-aa03e644b48a](https://towardsdatascience.com/k-means-clustering-algorithm-applications-evaluation-methods-and-drawbacks-aa03e644b48a)  
+
+[2] [https://towardsdatascience.com/understanding-k-means-clustering-in-machine-learning-6a6e67336aa1](https://towardsdatascience.com/understanding-k-means-clustering-in-machine-learning-6a6e67336aa1)
