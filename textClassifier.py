@@ -99,12 +99,6 @@ class TextClassifier():
 
         return termFreqVector
 
-    def buildInvDocFrequencyMap(self, word):
-        """
-        Inverse Document Frequency  = log(No. of Docs / No. of docs in with the word is present) 
-        """
-        pass
-
     def buildTermFreqIDFVector(self, text, norm=False):
         """
         Calculate TFIDF vector 

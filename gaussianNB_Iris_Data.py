@@ -50,4 +50,4 @@ print("Training data accuracy: ", clf.findAccuracy(trainY, yPredTrain))
 yPredTest = []
 for x in testX:
     yPredTest.append(clf.predict(x))
-print("Training data accuracy: ", clf.findAccuracy(testY, yPredTest))
+print("Testing data accuracy: ", clf.findAccuracy(testY, yPredTest))

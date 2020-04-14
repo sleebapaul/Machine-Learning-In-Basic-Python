@@ -151,7 +151,7 @@ class LogisticRegression():
         # L2 or Ridge regularization added to cost function if required
         if regularizationCoeff:
             regValue = sum([val[0]**2 for val in weights]) * \
-                regularizationCoeff / len(yTrue)
+                regularizationCoeff / (2*len(yTrue))
 
         loss = loss + regValue
         return loss
@@ -160,7 +160,7 @@ class LogisticRegression():
         """
         Calculates gradients of Log Error for weights and bias
         """
-        # Learn theory to understand what is the derivative of MSE for slope and Y intercept
+        # Learn theory to understand what is the derivative of Log loss for slope and Y intercept
         diff = [[ypred[i] - ytrue[i]] for i in range(len(ytrue))]
 
         xTranspose = self.__matrixTranspose(x)
@@ -187,7 +187,7 @@ class LogisticRegression():
         for epoch in range(epochs):
 
             yPred = self.__calculatePredictions(myWeights, myBias, x)
-            # Calculate MSE loss between prediction and actual output
+            # Calculate Log loss or between prediction and actual output
             loss = self.__calculateLossFunc(
                 yPred, yTrue, myWeights, myBias, regularizationCoeff)
             lossHistory.append(loss)
