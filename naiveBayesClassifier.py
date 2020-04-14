@@ -180,7 +180,7 @@ class GaussianNaiveBayesClassifier(NaiveBayesClassifier):
         Calculate standard deviation of values
         """
         varianceVal = sum([(xi - meanVal) ** 2 for xi in x]) / len(x)
-        return varianceVal
+        return math.sqrt(varianceVal)
 
     def __normalizeX(self):
         """
