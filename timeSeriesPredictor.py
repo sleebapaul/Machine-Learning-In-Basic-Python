@@ -52,7 +52,7 @@ Exponential Moving Average
 
 Bit more work here. 
 
-Exponential Moving Average for tomorrow, EMA = Current value x Smoothing Factor + EMA of Today x (1 - Smoothing Factor)
+Exponential Moving Average for tomorrow, EMA = EMA of Today x Smoothing Factor + EMA of Today x (1 - Smoothing Factor)
 
 Smoothing Factor = 2 / (Window Size + 1)
 
