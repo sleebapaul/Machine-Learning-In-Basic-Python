@@ -175,12 +175,12 @@ class GaussianNaiveBayesClassifier(NaiveBayesClassifier):
         meanVal = sum(x)/len(x)
         return meanVal
 
-    def __calculateSD(self, x, meanVal):
+    def __calculateVar(self, x, meanVal):
         """
         Calculate standard deviation of values
         """
         varianceVal = sum([(xi - meanVal) ** 2 for xi in x]) / len(x)
-        return math.sqrt(varianceVal)
+        return varianceVal
 
     def __normalizeX(self):
         """
@@ -210,7 +210,7 @@ class GaussianNaiveBayesClassifier(NaiveBayesClassifier):
         Helper in normalizing the entire input data
         """
         mean = self.__calculateMean(feature)
-        var = self.__calculateSD(feature, mean)
+        var = self.__calculateVar(feature, mean)
         normlizedFeature = [(x-mean)/var for x in feature]
         return normlizedFeature
 
@@ -250,7 +250,7 @@ class GaussianNaiveBayesClassifier(NaiveBayesClassifier):
         for category, val in values.items():
 
             mean = self.__calculateMean(val)
-            var = self.__calculateSD(val, mean)
+            var = self.__calculateVar(val, mean)
             likelihood[category]["Mean"] = mean
             likelihood[category]["Variance"] = var
 
