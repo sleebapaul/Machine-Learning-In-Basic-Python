@@ -45,7 +45,7 @@ class LinearRegression():
 
         # L2 or Ridge regularization added to cost function if required
         if regularizationCoeff:
-            regValue = slope * regularizationCoeff / 2*len(yTrue)
+            regValue = (slope**2) * regularizationCoeff / 2*len(yTrue)
 
         loss = loss + regValue
         return loss
